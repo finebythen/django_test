@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>{{ cluster_db.name }}</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-around;
+        }
+        button {
+            width: 275px;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        button:hover {
+            cursor: pointer;
+            background-color: #669900;
+            color: #fff;
+        }
+        .a-button {
+            text-decoration: none;
+            color: #000;
+        }
+        .a-button:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'Index' %}">Zurück</a>
+    </div>
+
+    <hr>
+
+    <div class="container">
+        <h3>{{ cluster_db.name }}</h3>
+        <h3>{{ cluster_db.id }}</h3>
+        <button type="button"><a href="{% url 'Ticket' cluster_db.id %}" class="a-button">Ticket erstellen</a></button>
+    </div>
+</body>
+</html>

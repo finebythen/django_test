@@ -1,0 +1,106 @@
+<html>
+<head>
+    <title>General Test</title>
+    <style>
+        .container-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr;
+            grid-template-areas:
+            "content-customer content-project content-cluster";
+            grid-gap: 1rem;
+            margin-top: 2rem;
+            justify-content: space-around;
+        }
+        .content-customer {
+            grid-area: content-customer;
+        }
+        .content-project {
+            grid-area: content-project;
+        }
+        .content-cluster {
+            grid-area: content-cluster;
+        }
+        table {
+            margin: 0 auto;
+            width: 100%;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+        table thead {
+            background-color: #669900;
+            color: #fff;
+            font-weight: 700;
+        }
+        a {
+            text-decoration: none;
+        }
+        a:hover {
+            color: #669900;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-grid">
+
+        <div class="content-customer">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Bezeichnung Kunde</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in customer_db %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.name }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content-project">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Bezeichnung Projekt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in project_db %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.name }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content-cluster">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Bezeichnung Cluster</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cluster_db %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td><a href="{% url 'View' item.id %}">{{ item.name }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+</html>

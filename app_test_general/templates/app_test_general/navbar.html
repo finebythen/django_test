@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Navbar Example</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <style>
+        *, *::after, *::before {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            width: 100%;
+            height: 70px;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            background-color: #282828;
+        }
+        h1 {
+            position: absolute;
+            padding: 3px;
+            float: left;
+            margin-left: 2%;
+            margin-top: 10px;
+            font-family: 'Ubuntu', sans-serif;
+            color: #39ca74;
+        }
+        span {
+            color: #ffffff;
+        }
+        ul {
+            width: auto;
+            float: right;
+            margin-top: 8px;
+        }
+        li {
+            display: inline-block;
+            padding: 15px 30px;
+        }
+        a {
+            text-align: center;
+            color: #ffffff;
+            text-decoration: none;
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 1.2vw;
+        }
+        a:hover {
+            color: #F0c330;
+            transition: 0.5s;
+        }
+        .container {
+            width: 65%;
+            margin: 5rem auto;
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 1.5rem;
+        }
+
+        {% block style %}{% endblock style %}
+    </style>
+</head>
+<header>
+    <h1>Example <span>NAVBAR</span></h1>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">other stuff</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact us</a></li>
+        </ul>
+    </nav>
+</header>
+<body>
+
+    <div class="container">
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+        takimata sanctus est Lorem ipsum dolor sit amet.
+    </div>
+
+    {% block content %}{% endblock content %}
+
+    {% block script %}{% endblock script %}
+
+</body>
+</html>

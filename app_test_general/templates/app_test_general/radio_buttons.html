@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Test | Radio Buttons</title>
+    <script type="text/javascript">
+        function colornames()
+        {
+            colordisplay = document.querySelector('input[name=color]:checked').value;
+            document.querySelector("#selectedColorName").textContent = 'The checked radio value is ' + colordisplay;
+        }
+    </script>
+</head>
+<body>
+    <a href="{% url 'Index' %}">Zurück</a>
+
+    <hr>
+
+    {% for item in colors %}
+    <input type="radio" value="{{ item.colorname }}" name="color">{{ item.colorname }}
+    {% endfor %}
+    <input type="submit" value="Click" onclick="colornames()">
+    <b style="color: #669900;" id="selectedColorName"></b>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends 'app_test_general/navbar.html' %}
+
+{% block style %}
+    .progress-bar {
+        width: 500px;
+        margin: 0 auto;
+        height: 3em;
+        background-color: #111;
+        border-radius: 1.5em;
+        color: white;
+    }
+    .progress-bar::before {
+        content: attr(data-label);
+        display: flex;
+        align-items: center;
+        position: absolute;
+        left: .5em;
+        top: .5em;
+        bottom: .5em;
+        width: 10%;
+        min-width: 2rem;
+        max-width: calc(100% - 1em);
+        background-color: #069;
+        border-radius: 1em;
+    }
+{% endblock style %}
+
+{% block content %}
+
+    <div class="progress-bar" data-label="Loading...">
+
+    </div>
+
+{% endblock content %}
+
+{% block script %}
+
+{% endblock script %}

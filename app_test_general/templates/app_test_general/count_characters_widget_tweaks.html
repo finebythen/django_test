@@ -1,0 +1,58 @@
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Counter | Widget Tweaks</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        .container {
+            width: 500px;
+            margin-top: 100px;
+            font-size: 18px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ formset.management_form }}
+
+            <div class="form-group">
+                <label>Count Up</label>
+                {% render_field formset.name class="form-control" onkeyup="count_up(this);" %}
+                <span class="text-muted pull-right" id="count1">Anzahl Zeichen: 0</span>
+            </div>
+
+            <br><br>
+
+            <div class="form-group">
+                <label>Count Down</label>
+                {% render_field formset.area class="form-control" onkeyup="count_down(this);" readonly="readonly" %}
+                <span class="text-muted pull-right" id="count2">verbleibende Zeichen: 500</span>
+            </div>
+
+            <button type="submit" class="btn btn-info">Speichern</button>
+
+        </form>
+    </div>
+
+    <script>
+        function count_up(obj) {
+            document.getElementById('count1').innerHTML = 'Anzahl Zeichen: ' + obj.value.length;
+        }
+
+        function count_down(obj) {
+            var element = document.getElementById('count2');
+            element.innerHTML = 'verbleibende Zeichen: ' + (500 - obj.value.length);
+        }
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>
