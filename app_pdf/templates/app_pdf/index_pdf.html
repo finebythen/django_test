@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>App | PDF-Export</title>
+        <!-- Bootstrapp -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+        <style>
+            body {
+                background-color: #f2f2f2;
+                margin: 0;
+                padding: 0;
+                font-family: 'Ubuntu', sans-serif;
+            }
+            h4 {
+                text-decoration: underline;
+                margin-bottom: 2rem;
+            }
+            .flex-container {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-around;
+            }
+            .grid-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                grid-template-rows: 0.25fr 1fr;
+                grid-template-areas:
+                "content-button-list content-button-list content-button-list content-button-list"
+                "content-information content-information content-empty content-empty";
+                grid-gap: 0.5rem;
+                margin: 1rem;
+            }
+            .content-button-list { grid-area: content-button-list; }
+            .content-information { grid-area: content-information; }
+            .content-empty { grid-area: content-empty; }
+        </style>
+    </head>
+    <body>
+
+        <div class="grid-container">
+            <div class="content-button-list">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{% url 'RenderAllPdfView' %}"><button class="btn btn-success">PDF-View</button></a>
+                        <a href="{% url 'RenderAllPdfDownload' %}"><button class="btn btn-info" style="margin-left: 2rem;">PDF-Download</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="content-information">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Coworker</h4>
+                        {% for item in db %}
+                            <div class="flex-container">
+                                <p style="margin: 1rem;">{{ item }}</p>
+                                <a href="{% url 'RenderSinglePdfView' item.id %}"><button class="btn btn-primary" style="margin: 1rem;">{{ item }}</button></a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-empty"></div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </body>
+</html>

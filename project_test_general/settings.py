@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'app_api',
+    'app_pdf',
     'app_test_general',
 
     'rest_framework',

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PDF | All Data</title>
+
+        <style>
+            .grid-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 0.25fr 1fr;
+                grid-template-areas:
+                "content-name-1 content-name-2"
+                "content-description-1 content-description-2";
+                grid-gap: 0.5rem;
+                margin: 1rem;
+            }
+            .content-name-1 { grid-area: content-name-1; }
+            .content-name-2 { grid-area: content-name-2; }
+            .content-description-1 { grid-area: content-description-1; }
+            .content-description-2 { grid-area: content-description-2; }
+        </style>
+    </head>
+    <body>
+        <div class="grid-container">
+            <div class="content-name-1">
+                <h5>Name:</h5>
+                {{ customer_pdf_1.name }}
+                <hr>
+            </div>
+
+            <div class="content-name-2">
+                <h5>Beschreibung</h5>
+                {{ customer_pdf_1.description }}
+            </div>
+
+            <div class="content-description-1">
+                <h5>Name:</h5>
+                {{ customer_pdf_2.name }}
+            </div>
+
+            <div class="content-description-2">
+                <h5>Beschreibung</h5>
+                {{ customer_pdf_2.description }}
+            </div>
+        </div>
+    </body>
+</html>
