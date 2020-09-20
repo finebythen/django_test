@@ -163,3 +163,13 @@ class CsvLoad(models.Model):
             pass
         self.total = price * self.quantity
         super().save(*args, **kwargs)
+
+
+class CustomerPDF(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(max_length=500)
+    date_updated = models.DateTimeField(auto_now=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name

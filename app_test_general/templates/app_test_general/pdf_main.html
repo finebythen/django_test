@@ -1,0 +1,35 @@
+{% extends 'app_test_general/base.html' %}
+
+{% block title %}
+PDF-Export | Main
+{% endblock title %}
+
+{% block style %}
+<style>
+    body {
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            font-family: 'Ubuntu', sans-serif;
+        }
+    button {
+        margin: auto 2rem;
+        width: 75px;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                {% for item in object_list %}
+                    {{ item }}
+                    <a href="{% url 'RenderCustomerPdfView' item.id %}"><button class="btn btn-primary">pdf</button></a>
+                    <br>
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

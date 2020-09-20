@@ -1,14 +1,17 @@
 from django.db import connections, transaction
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.http import HttpResponse, FileResponse
+from django.template.loader import get_template
+from django.views.generic import ListView
+from xhtml2pdf import pisa
 from django_pandas.io import read_frame
 from sqlalchemy import create_engine
 from time import strftime
-import numpy as np
-import csv
 import pandas as pd
-from datetime import timedelta, date, time, datetime
-
+import io
+from reportlab.pdfgen import canvas
+from datetime import datetime
 from .models import *
 from .forms import *
 from .filters import *
@@ -289,3 +292,54 @@ def csv_load_save(request):
 
     context = {'list_df': list_df}
     return render(request, 'app_test_general/csv_load_and_save.html', context)
+
+
+class CustomerListView(ListView):
+    model = CustomerPDF
+    template_name = 'app_test_general/pdf_main.html'
+
+
+def customer_render_pdf_view(request, *args, **kwargs):
+    pk = kwargs.get('pk')
+    customer_pdf = get_object_or_404(CustomerPDF, pk=pk)
+
+    template_path = 'app_test_general/pdf_view.html'
+    context = {'customer_pdf': customer_pdf}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    # --> in case of direct download
+    # response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    # --> in case of online viewing
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response)
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
+
+def reportlab_view(request):
+    # Create a file-like buffer to receive PDF data.
+    buffer = io.BytesIO()
+
+    # Create the PDF object, using the buffer as its "file."
+    p = canvas.Canvas(buffer)
+
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawString(100, 100, "Hello world.")
+
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+
+    # FileResponse sets the Content-Disposition header so that browsers
+    # present the option to save the file.
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename='hello.pdf')

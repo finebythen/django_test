@@ -1,0 +1,28 @@
+{% extends 'app_test_general/base.html' %}
+
+{% block title %}
+PDF-Export | View
+{% endblock title %}
+
+{% block style %}
+<style>
+    body {
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            font-family: 'Ubuntu', sans-serif;
+        }
+</style>
+{% endblock style %}
+
+{% block content %}
+    <div class="container">
+        {{ customer_pdf }}
+        <hr>
+        {{ customer_pdf.description }}
+        <hr>
+    </div>
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}
